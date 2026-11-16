@@ -1,0 +1,174 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EduSmart AI</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial;background:#f1f5f9;color:#172554}
+header{background:linear-gradient(120deg,#102d70,#2563eb);color:white;padding:25px 18px;border-radius:0 0 25px 25px}
+header h1{margin:0;font-size:28px}
+header p{margin-bottom:0;color:#dbeafe}
+main{max-width:850px;margin:auto;padding:16px}
+.welcome,.panel,.card{background:white;padding:18px;border-radius:15px;margin:14px 0;box-shadow:0 3px 12px #0000000c}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.card{text-align:center;cursor:pointer;margin:0;border:1px solid #e2e8f0}
+.card span{font-size:32px}
+.card h3{font-size:15px}
+button{background:#2563eb;color:white;border:0;padding:12px 16px;border-radius:9px;cursor:pointer}
+.back{background:#475569;margin-bottom:12px}
+input{width:100%;padding:13px;border:1px solid #cbd5e1;border-radius:9px;margin:10px 0}
+.page{display:none}
+.lesson{background:#eff6ff;padding:14px;border-radius:10px;margin:10px 0;line-height:1.6}
+#developer{text-align:center}
+.photo{width:115px;height:115px;object-fit:cover;border-radius:50%;border:4px solid #2563eb}
+footer{text-align:center;padding:25px;color:#64748b}
+@media(max-width:380px){.grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<header>
+<h1>📚 EduSmart AI</h1>
+<p>Smart Learning for Every Student</p>
+</header>
+
+<main>
+<div id="home">
+<div class="welcome">
+<h2>Welcome Student! 👋</h2>
+<p>Learn, Practice and Improve your Knowledge.</p>
+</div>
+
+<h2>Choose Your Subject</h2>
+<div class="grid">
+<div class="card" onclick="openPage('science')"><span>🔬</span><h3>Science</h3></div>
+<div class="card" onclick="openPage('math')"><span>➗</span><h3>Mathematics</h3></div>
+<div class="card" onclick="openPage('social')"><span>🌍</span><h3>Social Studies</h3></div>
+<div class="card" onclick="openPage('health')"><span>❤️</span><h3>Health Education</h3></div>
+<div class="card" onclick="openPage('quiz')"><span>📝</span><h3>Quiz</h3></div>
+<div class="card" onclick="openPage('teacher')"><span>🤖</span><h3>AI Teacher</h3></div>
+</div>
+
+<div class="panel" id="developer">
+<h2>About Developer</h2>
+<img class="photo" src="manish.jpg" alt="Manish Thakur"
+onerror="this.style.display='none';document.getElementById('initials').style.display='block'">
+<div id="initials" style="display:none;font-size:38px;color:#2563eb;font-weight:bold">MT</div>
+<h3>Manish Thakur</h3>
+<p>Founder & App Developer</p>
+<p>EduSmart AI</p>
+</div>
+</div>
+
+<div class="page panel" id="science">
+<button class="back" onclick="home()">← Back</button>
+<h2>🔬 Science</h2>
+<div class="lesson"><b>Science:</b> Science is the systematic study of the natural world.</div>
+<div class="lesson"><b>Living Things:</b> Living things grow, breathe and reproduce.</div>
+<div class="lesson"><b>States of Matter:</b> Solid, Liquid and Gas.</div>
+</div>
+
+<div class="page panel" id="math">
+<button class="back" onclick="home()">← Back</button>
+<h2>➗ Mathematics</h2>
+<div class="lesson">Addition: 5 + 3 = 8</div>
+<div class="lesson">Subtraction: 10 - 4 = 6</div>
+<div class="lesson">Multiplication: 5 × 4 = 20</div>
+<div class="lesson">Division: 20 ÷ 5 = 4</div>
+<h3>Practice: 12 + 8 = ?</h3>
+<input id="mathAnswer" type="number" placeholder="Your answer">
+<button onclick="checkMath()">Check</button>
+<p id="mathResult"></p>
+</div>
+
+<div class="page panel" id="social">
+<button class="back" onclick="home()">← Back</button>
+<h2>🌍 Social Studies</h2>
+<div class="lesson">Nepal is a beautiful country in South Asia.</div>
+<div class="lesson">The capital city of Nepal is Kathmandu.</div>
+<div class="lesson">Environment includes air, water, land, plants and animals.</div>
+</div>
+
+<div class="page panel" id="health">
+<button class="back" onclick="home()">← Back</button>
+<h2>❤️ Health Education</h2>
+<div class="lesson">Wash your hands before eating.</div>
+<div class="lesson">Eat a balanced diet for good health.</div>
+<div class="lesson">Exercise daily to keep your body healthy.</div>
+</div>
+
+<div class="page panel" id="quiz">
+<button class="back" onclick="home()">← Back</button>
+<h2>📝 Quiz Practice</h2>
+<h3 id="question"></h3>
+<div id="options"></div>
+<p id="result"></p>
+<button onclick="nextQuestion()">Next Question</button>
+</div>
+
+<div class="page panel" id="teacher">
+<button class="back" onclick="home()">← Back</button>
+<h2>🤖 AI Teacher</h2>
+<div class="lesson" id="chatBox">Hello! Ask me a question.</div>
+<input id="userQuestion" placeholder="Type your question">
+<button onclick="askTeacher()">Ask</button>
+<p style="font-size:12px;color:#64748b">This is a basic demo chatbot. Live AI is not connected yet.</p>
+</div>
+</main>
+
+<footer>© 2026 EduSmart AI | Manish Thakur</footer>
+
+<script>
+function openPage(id){
+document.getElementById('home').style.display='none';
+document.querySelectorAll('.page').forEach(p=>p.style.display='none');
+document.getElementById(id).style.display='block';
+}
+function home(){
+document.getElementById('home').style.display='block';
+document.querySelectorAll('.page').forEach(p=>p.style.display='none');
+}
+function checkMath(){
+let a=document.getElementById('mathAnswer').value;
+document.getElementById('mathResult').innerText=
+a==='20'?'Correct! 🎉':'Try again. Answer is 20.';
+}
+let data=[
+{q:'What is the capital of Nepal?',o:['Pokhara','Kathmandu','Butwal'],a:'Kathmandu'},
+{q:'How many days are in a week?',o:['5','6','7'],a:'7'},
+{q:'Which planet do we live on?',o:['Mars','Earth','Jupiter'],a:'Earth'},
+{q:'Which gas do humans breathe?',o:['Oxygen','Hydrogen','Nitrogen'],a:'Oxygen'}
+];
+let index=0;
+function showQuiz(){
+let q=data[index];
+document.getElementById('question').innerText=q.q;
+document.getElementById('result').innerText='';
+let area=document.getElementById('options');
+area.innerHTML='';
+q.o.forEach(v=>{
+let b=document.createElement('button');
+b.innerText=v;b.style.margin='5px';
+b.onclick=()=>document.getElementById('result').innerText=
+v===q.a?'Correct Answer! 🎉':'Incorrect. Correct answer: '+q.a;
+area.appendChild(b);
+});
+}
+function nextQuestion(){index=(index+1)%data.length;showQuiz();}
+showQuiz();
+function askTeacher(){
+let q=document.getElementById('userQuestion').value.toLowerCase();
+let a='Good question! Try asking about Science, Maths, Nepal or Health.';
+if(q.includes('science'))a='Science is the study of nature and the world around us.';
+else if(q.includes('math')||q.includes('add'))a='Maths is the study of numbers. Example: 2 + 3 = 5.';
+else if(q.includes('nepal'))a='Nepal is in South Asia. Its capital is Kathmandu.';
+else if(q.includes('health'))a='Eat nutritious food, drink clean water and exercise daily.';
+else if(q.includes('hello'))a='Hello student! Welcome to EduSmart AI.';
+document.getElementById('chatBox').innerText='You: '+q+'\nTeacher: '+a;
+}
+</script>
+</body>
+</html>
